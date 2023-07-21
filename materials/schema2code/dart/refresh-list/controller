@@ -1,0 +1,70 @@
+import 'package:f_common/f_common.dart';
+import 'package:f_view/f_view.dart';
+import 'package:get/get.dart';
+
+import '../../../domains/domains.dart';
+import '../../../middleware/index.dart';
+
+class <%= className %>ListController extends GetxController
+    with StateMixin<List<<%= dataClass %>>> {
+  <%= className %>ListController();
+
+  late EasyRefreshController refreshController;
+
+  List<<%= dataClass %>> <%= camelClassName %>List = [];
+
+  int page = 0;
+
+  @override
+  void onInit() {
+    super.onInit();
+    refreshController = EasyRefreshController(
+      controlFinishRefresh: true,
+      controlFinishLoad: true,
+    );
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    feachData();
+  }
+
+  Future<bool> feachData() async {
+    try {
+      if (page == 0) {
+        <%= camelClassName %>List.clear();
+        change(<%= camelClassName %>List, status: RxStatus.loading());
+      }
+      var data = await App<%= className %>ationRecordsRequest.instance
+          .getV1<%= className %>RecordList(page: page, pageSize: DEFAULT_PAGE_SIZE);
+      var hasNext = data.length >= DEFAULT_PAGE_SIZE;
+      <%= camelClassName %>List.addAll(data);
+      change(<%= camelClassName %>List,
+          status:
+              <%= camelClassName %>List.isEmpty ? RxStatus.empty() : RxStatus.success());
+      return hasNext;
+    } catch (e) {
+      Log.e(e.toString());
+      if (page == 0) change([], status: RxStatus.error(e.toString()));
+      return false;
+    }
+  }
+
+  onRefresh() async {
+    page = 0;
+    refreshController.resetFooter();
+    var hasNext = await feachData();
+    refreshController.finishRefresh();
+    if (!hasNext) {
+      refreshController.finishLoad(IndicatorResult.noMore);
+    }
+  }
+
+  onLoad() async {
+    page++;
+    var hasNext = await feachData();
+    refreshController
+        .finishLoad(hasNext ? IndicatorResult.success : IndicatorResult.noMore);
+  }
+}

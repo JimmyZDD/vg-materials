@@ -1,0 +1,31 @@
+import 'package:f_common/f_common.dart';
+import 'package:f_view/f_view.dart';
+import 'package:flutter/material.dart';
+
+import '../../../domains/domains.dart';
+import '../../../middleware/index.dart';
+
+class <%= className %>Item extends StatelessWidget {
+  final <%= dataClass %> item;
+
+  const <%= className %>Item(this.item, {super.key});
+
+  List<Map<String, String>> get tableData => [<% properties.forEach(function(p){ %>
+    {'label': "<%= p.title %>", 'value': item.<%= p.key %>.safeDisplay},<% }); %>
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Gaps.vGap10,
+          TableView(tableData),
+          Gaps.vGap4
+        ],
+      ),
+    );
+  }
+}

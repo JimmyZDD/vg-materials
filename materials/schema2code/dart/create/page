@@ -1,0 +1,60 @@
+import 'package:f_common/f_common.dart';
+import 'package:f_view/f_view.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../domains/api/requests/upload.dart';
+import './controllers/<%= snakeName %>_creat.dart';
+
+class <%= className %>CreatPage extends GetView<<%= className %>CreatController> {
+  const <%= className %>CreatPage({Key? key}) : super(key: key);
+
+  // 主视图
+  Widget _buildView() {
+    return FormPro(
+      controller.formInstance,
+      // ignore: invalid_use_of_protected_member
+      controller.formColumns,
+      uploadProvider: uploadProvider,
+      topChildren: [
+        Gaps.vGap15,
+        const Text(
+          '创建%= className %>',
+          style: TextStyles.textBold18,
+        ),
+        Gaps.vGap15,
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<<%= className %>CreatController>(
+      init: <%= className %>CreatController(),
+      id: "<%= snakeName %>_creat",
+      builder: (_) {
+        return KeyboardDismisser(
+          gestures: const [
+            GestureType.onTap,
+            GestureType.onPanUpdateDownDirection
+          ],
+          child: Scaffold(
+            appBar: const NavBar(title: '创建<%= className %>'),
+            bottomNavigationBar: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: BrnBigMainButton(
+                  title: '确定',
+                  onTap: controller.create<%= className %>Data,
+                ),
+              ),
+            ),
+            body: SafeArea(
+              child: _buildView(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

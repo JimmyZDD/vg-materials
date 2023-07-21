@@ -1,0 +1,41 @@
+import 'package:f_common/f_common.dart';
+import 'package:f_native/f_native.dart';
+import 'package:f_view/f_view.dart';
+import 'package:get/get.dart';
+
+import '../../../domains/domains.dart';
+import '../../../middleware/index.dart';
+import '<%= snakeName %>_list.dart';
+
+class <%= className %>CreatController extends GetxController {
+  <%= className %>CreatController();
+
+  FormProInstance formInstance = FormProInstance();
+  List<Map<String, dynamic>> formColumns = [<% properties.forEach(function(p){ %>
+    {
+      "key": "<%= p.key %>",
+      "title": "<%= p.title %>",
+      'type': 'input',
+      'isRequire': <%= p.required %>,
+    },<% }); %>
+  ];
+
+  create<%= className %>Data() async {
+    try {
+      var map = formInstance.getFormValue();
+      showLoading();
+      await App<%= className %>RecordsRequest.instance.createV1<%= className %>Record(
+          body: <%= dataClass %>.fromJson({
+        ...map
+      }));
+      await hiddenLoading();
+      <%= className %>ListController controller = Get.find();
+      controller.onRefresh();
+      await Future.delayed(const Duration(milliseconds: 100));
+      Get.back(closeOverlays: true);
+    } catch (e) {
+      Loading.error("数据错误：$e");
+      Log.e(e.toString());
+    }
+  }
+}

@@ -1,0 +1,8 @@
+const Mock = require('mockjs');
+const { Random } = Mock;
+
+export function <%= rawSelectedText || 'getRandomData' %>() {
+	<%- mockCode %>
+  const res = <%- mockData %>
+	return Promise.resolve(res);
+}

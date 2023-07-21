@@ -1,0 +1,39 @@
+import 'package:f_common/f_common.dart';
+import 'package:f_view/f_view.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import './controllers/<%= snakeName %>_detail.dart';
+
+class <%= className %>DetailPage extends GetView<<%= className %>DetailController> {
+  const <%= className %>DetailPage({Key? key}) : super(key: key);
+
+  // 主视图
+  Widget _buildView() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Gaps.vGap10,
+          TableView(controller.tableData),
+          Gaps.vGap12,
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<<%= className %>DetailController>(
+      init: <%= className %>DetailController(),
+      id: "<%= snakeName %>_detail",
+      builder: (_) {
+        return Scaffold(
+          appBar: const NavBar(title: '<%= snakeName %>详情'),
+          body: SafeArea(
+            child: _buildView(),
+          ),
+        );
+      },
+    );
+  }
+}

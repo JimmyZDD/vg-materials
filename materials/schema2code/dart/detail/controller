@@ -1,0 +1,15 @@
+import 'package:f_common/f_common.dart';
+import 'package:get/get.dart';
+
+import '../../../domains/domains.dart';
+import '../../../middleware/index.dart';
+
+class <%= className %>DetailController extends GetxController {
+  <%= className %>DetailController();
+
+  late <%= dataClass %> currentItem;
+
+  List<Map<String, String>> get tableData => [<% properties.forEach(function(p){ %>
+    {'label': "<%= p.title %>", 'value': currentItem.<%= p.key %>.safeDisplay},<% }); %>
+  ];
+}
