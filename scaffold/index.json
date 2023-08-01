@@ -17,8 +17,7 @@
         "title": "flutter-base",
         "description": "flutter getx 组件化 vgcode",
         "screenshot": "https://gitee.com/img-host/img-host/raw/master/2020/11/05/1604587962875.jpg",
-        "repository": "git@git.grizzlychina.com:frontend/xt_app.git",
-        "tag": "1.1.0",
+        "repository": "-b template --single-branch git@git.grizzlychina.com:frontend/xt_app.git",
         "repositoryType": "git"
       }
     ]
