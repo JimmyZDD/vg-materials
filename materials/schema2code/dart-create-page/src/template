@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../domains/api/requests/upload.dart';
-import './controllers/<%= snakeName %>_creat.dart';
+import './controllers/<%= snakeName %>_create.dart';
 
-class <%= className %>CreatPage extends GetView<<%= className %>CreatController> {
-  const <%= className %>CreatPage({Key? key}) : super(key: key);
+class <%= className %>CreatePage extends GetView<<%= className %>CreateController> {
+  const <%= className %>CreatePage({Key? key}) : super(key: key);
 
   // 主视图
   Widget _buildView() {
@@ -29,8 +29,8 @@ class <%= className %>CreatPage extends GetView<<%= className %>CreatController>
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<<%= className %>CreatController>(
-      init: <%= className %>CreatController(),
+    return GetBuilder<<%= className %>CreateController>(
+      init: <%= className %>CreateController(),
       id: "<%= snakeName %>_creat",
       builder: (_) {
         return KeyboardDismisser(
@@ -43,7 +43,8 @@ class <%= className %>CreatPage extends GetView<<%= className %>CreatController>
             bottomNavigationBar: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(12),
-                child: BrnBigMainButton(
+                child: Button(
+                  block: true,
                   title: '确定',
                   onTap: controller.create<%= className %>Data,
                 ),

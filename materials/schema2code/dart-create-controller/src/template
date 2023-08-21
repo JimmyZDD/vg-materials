@@ -7,17 +7,16 @@ import '../../../domains/domains.dart';
 import '../../../middleware/index.dart';
 import '<%= snakeName %>_list.dart';
 
-class <%= className %>CreatController extends GetxController {
-  <%= className %>CreatController();
+class <%= className %>CreateController extends GetxController {
+  <%= className %>CreateController();
 
   FormProInstance formInstance = FormProInstance();
-  List<Map<String, dynamic>> formColumns = [<% properties.forEach(function(p){ %>
-    {
-      "key": "<%= p.key %>",
-      "title": "<%= p.title %>",
-      'type': 'input',
-      'isRequire': <%= p.required %>,
-    },<% }); %>
+  List<FormProItemSchema> formColumns = [<% properties.forEach(function(p){ %>
+    FormProItemSchema(
+      '<%= p.key %>',
+      title: '<%= p.title %>',
+      isRequire: <%= p.required %>,
+    ),<% }); %>
   ];
 
   create<%= className %>Data() async {

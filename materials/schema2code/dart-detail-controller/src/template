@@ -9,7 +9,7 @@ class <%= className %>DetailController extends GetxController {
 
   late <%= dataClass %> currentItem;
 
-  List<Map<String, String>> get tableData => [<% properties.forEach(function(p){ %>
-    {'label': "<%= p.title %>", 'value': currentItem.<%= p.key %>.safeDisplay},<% }); %>
+  List<TableItemSchema> get tableData => [<% properties.forEach(function(p){ %>
+    TableItemSchema(label: "<%= p.title %>", value: item.<%= p.key %>.safeDisplay),<% }); %>
   ];
 }

@@ -10,8 +10,8 @@ class <%= className %>Item extends StatelessWidget {
 
   const <%= className %>Item(this.item, {super.key});
 
-  List<Map<String, String>> get tableData => [<% properties.forEach(function(p){ %>
-    {'label': "<%= p.title %>", 'value': item.<%= p.key %>.safeDisplay},<% }); %>
+  List<TableItemSchema> get tableData => [<% properties.forEach(function(p){ %>
+    TableItemSchema(label: "<%= p.title %>", value: item.<%= p.key %>.safeDisplay),<% }); %>
   ];
 
   @override

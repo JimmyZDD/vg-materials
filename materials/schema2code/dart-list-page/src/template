@@ -10,7 +10,7 @@ import 'widgets/<%= snakeName %>_item.dart';
 class <%= className %>ListPage extends GetView<<%= className %>ListController> {
   const <%= className %>ListPage({Key? key}) : super(key: key);
 
-  Widget _buildListView(List<List<%= className %>RecordResp>? state) {
+  Widget _buildListView(List<<%= dataClass %>>? state) {
     return ListView.builder(
       itemBuilder: (context, index) {
         var item = state[index];
@@ -32,14 +32,22 @@ class <%= className %>ListPage extends GetView<<%= className %>ListController> {
         return Scaffold(
           appBar: NavBar(
             title: "<%= snakeName %>",
-            actions: MyIconButton(
-              name: '新增',
-              direction: Direction.left,
-              iconWidget: const Icon(Icons.add, color: Colours.app_main),
-              style: TextStyles.textBold14.copyWith(color: Colours.app_main),
+            actions: Button.none(
               onTap: () {
-                Get.toNamed(RouteNames.<%= className %>CreatPage);
+                Get.toNamed(RouteNames.<%= className %>CreatePage);
               },
+              child: Row(
+                children: [
+                  Icon(Icons.add, size: 16, color: Get.theme.primaryColor),
+                  Text(
+                    '新增',
+                    style: TextStyle(
+                        fontSize: Dimens.font_sp14,
+                        fontWeight: FontWeight.bold,
+                        color: Get.theme.primaryColor),
+                  ),
+                ],
+              ),
             ),
           ),
           body: SafeArea(
