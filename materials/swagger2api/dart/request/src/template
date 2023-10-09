@@ -1,0 +1,4 @@
+<% if (description) { %><%- description %><% } %>
+  static Future<<%- returnType %>> <%= funcName %>(<%- functionArgs %>) async {
+    <% if (returnType !== 'void') { %>final res = <% } %>await httpInstance.<%= method %>(<%- reqArgs %>);<%- returnContent %>
+  }

@@ -1,0 +1,52 @@
+export 'package:get/get.dart' show FormData;
+
+abstract class GetConnect {
+  onInit() {}
+  dispose() {}
+  get(
+    String path, {
+    Map<String, String>? headers,
+    String? contentType,
+    Map<String, dynamic>? query,
+  }) {}
+  post(
+    String path,
+    dynamic body, {
+    String? contentType,
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+    dynamic Function(double)? uploadProgress,
+  }) {}
+  put(
+    String path,
+    dynamic body, {
+    String? contentType,
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+    dynamic Function(double)? uploadProgress,
+  }) {}
+  delete(
+    String path, {
+    Map<String, String>? headers,
+    String? contentType,
+    Map<String, dynamic>? query,
+  }) {}
+}
+
+class BaseProvider extends GetConnect {}
+
+var httpInstance = BaseProvider()..onInit();
+
+class PageResp<T> {
+  List<T> data;
+  int page;
+  int size;
+  int total;
+
+  PageResp(
+    this.data, {
+    required this.page,
+    required this.size,
+    required this.total,
+  });
+}

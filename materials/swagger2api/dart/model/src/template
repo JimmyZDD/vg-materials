@@ -1,0 +1,12 @@
+class <%= className %> {
+  <%- properties %>
+  <%= className %>(<%- constructorContent %>);
+
+  factory <%= className %>.fromJson(Map<String, dynamic> json) => <%= className %>(
+    <%- fromJsonContent %>
+  );
+
+  Map<String, dynamic> toJson() => {
+    <%- toJsonContent %>
+  };
+}

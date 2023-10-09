@@ -1,0 +1,4 @@
+<% if (description) { %><%- description %><% } %>
+export async function <%= funcName %>(<%- functionArgs %>): Promise<<%- returnType %>> {
+  <% if (returnType !== 'void') { %>const res = <% } %>await http.<%= method %>(<%- reqArgs %>);<%- returnContent %>
+}

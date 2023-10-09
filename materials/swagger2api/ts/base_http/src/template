@@ -1,0 +1,15 @@
+interface Http {
+  get: (url: string, params?: Record<string, any>) => Promise<any>;
+  post: (url: string, data?: Record<string, any>, params?: Record<string, any>) => Promise<any>;
+  put: (url: string, data?: Record<string, any>, params?: Record<string, any>) => Promise<any>;
+  delete: (url: string, data?: Record<string, any>, params?: Record<string, any>) => Promise<any>;
+  download: (url: string, params?: Record<string, any> | undefined) => Promise<any>;
+  upload: (file: File) => Promise<any>;
+}
+export let http: Http;
+export interface PageResp<T> {
+  data: T[];
+  page: number;
+  size: number;
+  total: number;
+}

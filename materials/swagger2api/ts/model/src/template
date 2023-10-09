@@ -1,0 +1,16 @@
+export class <%= className %> {
+  <%- properties %>
+  constructor(data: Omit<<%= className %>, 'toJson'>) {
+    <%- constructorContent %>
+  }
+
+  static fromJson(json: any): <%= className %> {
+    return new <%= className %>({
+      <%- fromJsonContent %>
+    });
+  }
+
+  toJson(): any {
+    return <%- toJsonContent %>;
+  }
+}
