@@ -1,0 +1,29 @@
+enum <%= className %> {
+  <%- propsContent %>
+
+  final <%= type %> value;
+  const <%= className %>(this.value);
+
+  String get name {
+    var index = values.indexWhere((e) => e.value == value);
+    return <%= className %>._names[index];
+  }
+
+  static List<(String, <%= type %>)> get options {
+    List<(String, <%= type %>)> options = [];
+    for (var i = 0; i < values.length; i++) {
+      options.add((_names[i], values[i].value));
+    }
+    return options;
+  }
+
+  static var _names = <%- commentNames %>
+
+  static <%= className %> from(dynamic val) {
+    if (val == null || val is! <%= type %>) {
+      throw Exception('<%= className %> from val not available');
+    }
+    <%- constructorContent %>
+    throw Exception('<%= className %> from val not available');
+  }
+}

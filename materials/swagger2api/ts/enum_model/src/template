@@ -1,0 +1,17 @@
+export class Enum<%= className %> {
+  static options = [
+<%- optionsContent %>
+  ];
+
+  static getName(val: <%= className %>) {
+    for (let index = 0; index < this.options.length; index++) {
+      const { label, value } = this.options[index];
+      if (val === value) return label;
+    }
+    throw Error('<%= className %> getName not found');
+  }
+}
+
+export enum <%= className %> {
+<%- propsContent %>
+}
