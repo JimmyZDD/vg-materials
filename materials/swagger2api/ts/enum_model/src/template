@@ -8,7 +8,7 @@ export class Enum<%= className %> {
       const { label, value } = this.options[index];
       if (val === value) return label;
     }
-    throw Error('<%= className %> getName not found');
+    return '';
   }
 }
 

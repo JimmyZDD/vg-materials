@@ -5,6 +5,7 @@ enum <%= className %> {
   const <%= className %>(this.value);
 
   String get name {
+    if (this == <%= className %>.errorOrUnknow) return '';
     var index = values.indexWhere((e) => e.value == value);
     return <%= className %>._names[index];
   }
@@ -21,9 +22,9 @@ enum <%= className %> {
 
   static <%= className %> from(dynamic val) {
     if (val == null || val is! <%= type %>) {
-      throw Exception('<%= className %> from val not available');
+      return <%= className %>.errorOrUnknow;
     }
     <%- constructorContent %>
-    throw Exception('<%= className %> from val not available');
+    return <%= className %>.errorOrUnknow;
   }
 }
